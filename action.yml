@@ -1,4 +1,4 @@
-name: CrowdStrike Cloud IaC Scanning
+name: 'CrowdStrike Cloud IaC Scanning'
 description: 'Assess security risks in your infrastructure as code (IaC) before applications are deployed using the FCS CLI tool. '
 author: 'ryan.payne@crowdstrike'
 
@@ -20,6 +20,8 @@ outputs:
 runs:
   using: composite
   steps:
+    - run: tar -xvzf fcs**.tar.gz
+      shell: bash
     - run: chmod +x fcs
       shell: bash
     - run: fcs iac scan --path ${{ inputs.target-directory }} --report-formats json --output-path ${{ inputs.output-directory}}
