@@ -20,9 +20,9 @@ outputs:
 runs:
   using: composite
   steps:
-    - run: tar -xvzf fcs_0.34.0_Linux_x86_64.tar.gz
+    - run: tar -xvzf $GITHUB_ACTION_PATH/fcs_0.34.0_Linux_x86_64.tar.gz
       shell: bash
-    - run: chmod +x fcs
+    - run: chmod +x $GITHUB_ACTION_PATH/fcs
       shell: bash
-    - run: fcs iac scan --path ${{ inputs.target-directory }} --report-formats json --output-path ${{ inputs.output-directory}}
+    - run: $GITHUB_ACTION_PATH/fcs iac scan --path ${{ inputs.target-directory }} --report-formats json --output-path ${{ inputs.output-directory}}
       shell: bash
