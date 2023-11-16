@@ -7,10 +7,6 @@ inputs:
     description: 'Directory you want to scan, ./ to scan all'
     required: true
     default: './'
-  output-directory:
-    description: 'Where to save scan results'
-    required: true
-    default: '.crowdstrike/'
 
 outputs:
   output1:
@@ -20,9 +16,11 @@ outputs:
 runs:
   using: composite
   steps:
+    - run: mkdir -p crowdstrike/$GITHUB_RUN_ID
+      shell: bash
     - run: tar -xvzf $GITHUB_ACTION_PATH/fcs_0.34.0_Linux_x86_64.tar.gz
       shell: bash
     - run: chmod +x fcs
       shell: bash
-    - run: ./fcs iac scan --path ${{ inputs.target-directory }} --report-formats json --output-path ${{ inputs.output-directory}}
+    - run: ./fcs iac scan --path ${{ inputs.target-directory }} --report-formats json --output-path ./crowdstrike/$GITHUB_RUN_ID
       shell: bash
