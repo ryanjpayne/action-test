@@ -20,7 +20,7 @@ outputs:
 runs:
   using: composite
   steps:
-    - run: tar -xvzf fcs**.tar.gz
+    - run: tar -xvzf fcs_0.34.0_Linux_x86_64.tar.gz
       shell: bash
     - run: chmod +x fcs
       shell: bash
