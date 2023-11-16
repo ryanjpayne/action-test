@@ -1,0 +1,26 @@
+name: CrowdStrike Cloud IaC Scanning
+description: 'Assess security risks in your infrastructure as code (IaC) before applications are deployed using the FCS CLI tool. '
+author: 'ryan.payne@crowdstrike'
+
+inputs:
+  target-directory:
+    description: 'Directory you want to scan, ./ to scan all'
+    required: true
+    default: './'
+  output-directory:
+    description: 'Where to save scan results'
+    required: true
+    default: '.crowdstrike/'
+
+outputs:
+  output1:
+    description: ''
+    value: ''
+
+runs:
+  using: composite
+  steps:
+    - run: chmod +x fcs
+      shell: bash
+    - run: fcs iac scan --path ${{ inputs.target-directory }} --report-formats json --output-path ${{ inputs.output-directory}}
+      shell: bash
